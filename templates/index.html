@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SafeLink - فاحص الروابط والملفات</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; }
+        body {
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: #fff;
+        }
+       .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 50px 40px;
+            border-radius: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            width: 100%;
+            max-width: 650px;
+            text-align: center;
+        }
+       .logo { font-size: 50px; margin-bottom: 10px; }
+        h1 { font-size: 28px; margin-bottom: 8px; }
+        p { color: #ccc; margin-bottom: 25px; }
+
+       .input-box { display: flex; gap: 10px; margin-bottom: 20px; }
+        input[type="url"], input[type="file"] {
+            flex: 1;
+            padding: 16px;
+            border: 2px solid rgba(255,255,255,0.2);
+            border-radius: 12px;
+            font-size: 16px;
+            background: rgba(0,0,0,0.2);
+            color: white;
+            outline: none;
+        }
+        input::placeholder { color: #aaa; }
+        input:focus { border-color: #00c6ff; }
+
+        button {
+            padding: 16px 28px;
+            background: linear-gradient(90deg, #00c6ff, #0072ff);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,114,255,0.4); }
+
+       .features { display: flex; justify-content: space-around; margin-top: 30px; font-size: 14px; color: #bbb; }
+        hr { margin: 30px 0; border-color: rgba(255,255,255,0.2); }
+
+       .result { margin-top: 25px; padding: 20px; border-radius: 12px; display: none; text-align: right; }
+       .safe { background: rgba(40, 167, 69, 0.2); border: 1px solid #28a745; }
+       .danger { background: rgba(220, 53, 69, 0.2); border: 1px solid #dc3545; }
+       .warning { background: rgba(255, 193, 7, 0.2); border: 1px solid #ffc107; color: #ffc107; }
+       .loading { background: rgba(0, 123, 255, 0.2); border: 1px solid #007bff; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">🛡️</div>
+        <h1>SafeLink</h1>
+        <p>احمي نفسك من الروابط والملفات المشبوهة</p>
+
+        <form id="urlForm" class="input-box">
+            <input type="url" id="urlInput" placeholder="الصق الرابط المشبوه هنا..." required>
+            <button type="submit">افحص الرابط</button>
+        </form>
+
+        <hr>
+        <p>او ارفع ملف للفحص</p>
+        <form id="fileForm" class="input-box">
+            <input type="file" id="fileInput" required>
+            <button type="submit">افحص الملف</button>
+        </form>
+
+        <div class="features">
+            <div class="feature">⚡ سريع</div>
+            <div class="feature">🔒 آمن 100%</div>
+            <div class="feature">🆓 مجاني</div>
+        </div>
+
+        <div id="resultBox" class="result"></div>
+    </div>
+
+    <script>
+        // فحص الرابط
+        document.getElementById('urlForm').addEventListener('submit', async function(e){
+            e.preventDefault();
+            let url = document.getElementById('urlInput').value;
+            let box = document.getElementById('resultBox');
+            box.style.display = 'block';
+            box.className = 'result loading';
+            box.innerHTML = '⏳ جاري فحص الرابط: <b>' + url + '</b>';
+
+            let response = await fetch('/scan', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({url: url})
+            });
+
+            let result = await response.json();
+            box.className = 'result ' + result.status;
+            box.innerHTML = result.message;
+        });
+
+        // فحص الملف
+        document.getElementById('fileForm').addEventListener('submit', async function(e){
+            e.preventDefault();
+            let file = document.getElementById('fileInput').files[0];
+            let box = document.getElementById('resultBox');
+            let formData = new FormData();
+            formData.append('file', file);
+
+            box.style.display = 'block';
+            box.className = 'result loading';
+            box.innerHTML = '⏳ جاري رفع وتحليل الملف: <b>' + file.name + '</b>... ممكن تاخد دقيقة';
+
+            let response = await fetch('/scan-file', { method: 'POST', body: formData });
+            let result = await response.json();
+
+            box.className = 'result ' + result.status;
+            box.innerHTML = result.message;
+        });
+    </script>
+</body>
+</html>
