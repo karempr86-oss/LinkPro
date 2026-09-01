@@ -16,23 +16,24 @@
             padding: 20px;
             color: #fff;
         }
-       .container {
+      .container {
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
-            padding: 50px 40px;
+            padding: 40px 30px;
             border-radius: 25px;
             border: 1px solid rgba(255, 255, 255, 0.2);
             width: 100%;
             max-width: 650px;
             text-align: center;
         }
-       .logo { font-size: 50px; margin-bottom: 10px; }
+      .logo { font-size: 50px; margin-bottom: 10px; }
         h1 { font-size: 28px; margin-bottom: 8px; }
         p { color: #ccc; margin-bottom: 25px; }
 
-       .input-box { display: flex; gap: 10px; margin-bottom: 20px; }
+      .input-box { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
         input[type="url"], input[type="file"] {
             flex: 1;
+            min-width: 0; /* مهم عشان ميطلعش بره في الموبايل */
             padding: 16px;
             border: 2px solid rgba(255,255,255,0.2);
             border-radius: 12px;
@@ -43,6 +44,7 @@
         }
         input::placeholder { color: #aaa; }
         input:focus { border-color: #00c6ff; }
+        input[type="file"] { color: #aaa; }
 
         button {
             padding: 16px 28px;
@@ -54,17 +56,39 @@
             font-weight: 700;
             cursor: pointer;
             transition: 0.3s;
+            white-space: nowrap; /* عشان الكلمة متتكسرش */
         }
         button:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,114,255,0.4); }
 
-       .features { display: flex; justify-content: space-around; margin-top: 30px; font-size: 14px; color: #bbb; }
+      .features { display: flex; justify-content: space-around; margin-top: 30px; font-size: 14px; color: #bbb; flex-wrap: wrap; gap: 10px;}
         hr { margin: 30px 0; border-color: rgba(255,255,255,0.2); }
 
-       .result { margin-top: 25px; padding: 20px; border-radius: 12px; display: none; text-align: right; }
-       .safe { background: rgba(40, 167, 69, 0.2); border: 1px solid #28a745; }
-       .danger { background: rgba(220, 53, 69, 0.2); border: 1px solid #dc3545; }
-       .warning { background: rgba(255, 193, 7, 0.2); border: 1px solid #ffc107; color: #ffc107; }
-       .loading { background: rgba(0, 123, 255, 0.2); border: 1px solid #007bff; }
+      .result { margin-top: 25px; padding: 20px; border-radius: 12px; display: none; text-align: right; word-break: break-word; }
+      .safe { background: rgba(40, 167, 69, 0.2); border: 1px solid #28a745; }
+      .danger { background: rgba(220, 53, 69, 0.2); border: 1px solid #dc3545; }
+      .warning { background: rgba(255, 193, 7, 0.2); border: 1px solid #ffc107; color: #ffc107; }
+      .loading { background: rgba(0, 123, 255, 0.2); border: 1px solid #007bff; }
+
+        /* ====== تعديلات الموبايل ====== */
+        @media (max-width: 600px) {
+            body { padding: 10px; }
+           .container { padding: 25px 20px; }
+            h1 { font-size: 24px; }
+           .logo { font-size: 40px; }
+            
+           .input-box {
+                flex-direction: column; /* يخلي الزرار تحت الانبوت */
+            }
+            
+            button {
+                width: 100%; /* الزرار ياخد العرض كله */
+            }
+
+           .features {
+                flex-direction: column;
+                gap: 8px;
+            }
+        }
     </style>
 </head>
 <body>
