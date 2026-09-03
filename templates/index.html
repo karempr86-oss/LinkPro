@@ -1,131 +1,177 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PUBG UC FREE</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-<style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SafeLink - احمي روابطك وملفاتك</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; }
+        body {
+            background: #030B1A;
+            min-height: 100vh;
+            color: #fff;
+            padding: 20px;
+            background-image: radial-gradient(circle at top, rgba(0, 114, 255, 0.2), transparent 50%);
+        }
 
-body {
-  background: url('https://i.imgur.com/8QjZ3yL.jpg') no-repeat center/cover;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: 'Poppins', sans-serif;
-}
+        /* الهيدر */
+        header { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto 40px; padding: 10px 0; border-bottom: 1px solid rgba(0, 114, 255, 0.3); }
+       .logo-header { display: flex; align-items: center; gap: 10px; font-size: 22px; font-weight: 900; }
+       .logo-header span:last-child { color: #00c6ff; }
+        nav a { color: #00c6ff; text-decoration: none; display: flex; align-items: center; gap: 5px; border-bottom: 2px solid #00c6ff; padding-bottom: 5px; }
 
-.card {
-  background: rgba(8, 12, 24, 0.88);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 24px;
-  padding: 40px 30px;
-  width: 400px;
-  text-align: center;
-  color: white;
-}
+        /* المحتوى */
+       .main-container { max-width: 700px; margin: 0 auto; text-align: center; }
+       .hero-logo { width: 120px; height: 120px; margin: 0 auto 20px; filter: drop-shadow(0 0 20px rgba(0, 198, 255, 0.7)); }
+        h1 { font-size: 48px; font-weight: 900; }
+        h1 span { color: #00c6ff; }
+       .subtitle { color: #A0B4D0; font-size: 18px; margin-bottom: 30px; }
 
-.logo h1 {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 64px;
-  letter-spacing: 3px;
-  color: #EAEAEA;
-  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
-}
+        /* الكارد */
+       .card {
+            background: rgba(10, 25, 50, 0.5);
+            backdrop-filter: blur(15px);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(0, 198, 255, 0.3);
+            box-shadow: 0 0 30px rgba(0, 114, 255, 0.2);
+        }
 
-.badge {
-  background: #FFB800;
-  color: #000;
-  font-weight: 700;
-  font-size: 24px;
-  padding: 4px 20px;
-  border-radius: 6px;
-  display: inline-block;
-  margin-top: -10px;
-}
+        /* انبوت الرابط */
+       .input-wrapper { position: relative; margin-bottom: 15px; }
+       .input-wrapper.icon { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); width: 20px; opacity: 0.7; }
+        input[type="url"] {
+            width: 100%; padding: 18px 50px 18px 20px; background: rgba(0,0,0,0.3);
+            border: 2px solid rgba(0, 198, 255, 0.4); border-radius: 15px; color: white; font-size: 16px;
+        }
+        input::placeholder { color: #A0B4D0; }
 
-.uc-icon {
-  margin: 15px 0;
-  font-weight: 700;
-  border: 2px solid #FFB800;
-  border-radius: 8px;
-  padding: 2px 12px;
-  display: inline-block;
-  color: #FFB800;
-}
+        /* الزرار */
+       .btn {
+            width: 100%; padding: 18px; border: none; border-radius: 15px; font-size: 18px;
+            font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;
+            transition: 0.3s; margin-bottom: 20px;
+        }
+       .btn-primary { background: linear-gradient(90deg, #00c6ff, #8A2BE2); color: white; }
+       .btn-secondary { background: linear-gradient(90deg, #00F5A0, #00D9F5); color: #030B1A; }
+       .btn:hover { transform: translateY(-3px); filter: brightness(1.1); }
 
-h2 { font-size: 24px; margin: 20px 0 8px; }
-.subtitle { color: #A0A0A0; font-size: 14px; margin-bottom: 20px; }
+        /* رفع الملف */
+       .divider { display: flex; align-items: center; color: #A0B4D0; margin: 20px 0; }
+       .divider::before,.divider::after { content: ''; flex: 1; border-bottom: 1px solid rgba(160, 180, 208, 0.2); }
+       .divider span { padding: 0 10px; }
+       .file-upload {
+            border: 2px dashed rgba(0, 198, 255, 0.4); border-radius: 15px; padding: 20px;
+            display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px;
+        }
+       .file-info { text-align: right; }
+       .file-info b { font-size: 16px; }
+       .file-info span { font-size: 12px; color: #A0B4D0; }
+       .btn-file { background: rgba(0, 114, 255, 0.2); color: #00c6ff; border: 1px solid #00c6ff; padding: 10px 20px; border-radius: 10px; cursor: pointer; display: flex; align-items: center; gap: 5px;}
+        input[type="file"] { display: none; }
 
-.divider { 
-  display: flex; align-items: center; color: #FFB800; 
-  font-weight: 600; margin: 20px 0; 
-}
-.divider::before, .divider::after {
-  content: ""; flex: 1; height: 1px; background: rgba(255,255,255,0.2);
-}
-.divider span { padding: 0 10px; }
+        /* المميزات */
+       .features { display: flex; justify-content: space-between; gap: 15px; margin-top: 30px; }
+       .feature-box { background: rgba(10, 25, 50, 0.5); padding: 15px; border-radius: 15px; flex: 1; text-align: right; display: flex; align-items: center; gap: 10px; }
+       .feature-icon { width: 40px; height: 40px; background: rgba(0, 114, 255, 0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+       .feature-box b { display: block; }
+       .feature-box span { font-size: 12px; color: #A0B4D0; }
+        
+        footer { text-align: center; margin-top: 40px; color: #A0B4D0; font-size: 14px; }
 
-.btn {
-  width: 100%; padding: 14px; border-radius: 12px; border: none;
-  font-size: 16px; font-weight: 600; cursor: pointer;
-  display: flex; align-items: center; justify-content: center; gap: 12px;
-  margin-bottom: 12px; transition: 0.2s;
-}
-.btn:hover { transform: scale(1.02); }
+        /* النتيجة */
+       .result { margin-top: 20px; padding: 20px; border-radius: 12px; display: none; text-align: right; }
+       .safe { background: rgba(40, 167, 69, 0.2); border: 1px solid #28a745; }
+       .danger { background: rgba(220, 53, 69, 0.2); border: 1px solid #dc3545; }
+       .loading { background: rgba(0, 123, 255, 0.2); border: 1px solid #007bff; }
 
-.btn-google { background: white; color: #333; }
-.btn-fb { background: #1877F2; color: white; }
-
-.icon { width: 22px; height: 22px; }
-
-.shield { color: #FFB800; margin: 20px 0 8px; }
-.note { color: #A0A0A0; font-size: 13px; }
-
-.signup { margin-top: 20px; color: #A0A0A0; font-size: 14px; }
-.signup a { color: #FFB800; text-decoration: none; font-weight: 600; }
-
-.footer {
-  margin-top: 25px; color: #A0A0A0; font-size: 12px;
-  display: flex; justify-content: center; gap: 8px;
-}
-</style>
+        /* للموبايل */
+        @media (max-width: 600px) {
+            h1 { font-size: 36px; }
+           .features { flex-direction: column; }
+           .file-upload { flex-direction: column; gap: 10px; }
+        }
+    </style>
 </head>
 <body>
+    <header>
+        <div class="logo-header">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="#00c6ff" stroke-width="2"/><path d="M2 17L12 22L22 17" stroke="#00c6ff" stroke-width="2"/><path d="M2 12L12 17L22 12" stroke="#00c6ff" stroke-width="2"/></svg>
+            <span>Safe</span><span>Link</span>
+        </div>
+        <nav><a href="#">الرئيسية 🏠</a></nav>
+    </header>
 
-  <div class="card">
-    <div class="logo">
-      <h1>PUBG</h1>
-      <div class="badge">UC FREE</div>
-      <div class="uc-icon">UC</div>
+    <div class="main-container">
+        <svg class="hero-logo" viewBox="0 0 100 100"><path d="M50 2 L10 20 L10 50 C10 80 50 98 50 98 C50 98 90 80 90 50 L90 20 Z" fill="url(#grad)" stroke="#00c6ff" stroke-width="2"/><path d="M65 35 L55 45 M55 35 L65 45" stroke="white" stroke-width="4" stroke-linecap="round"/><defs><linearGradient id="grad"><stop offset="0%" stop-color="#0072ff"/><stop offset="100%" stop-color="#00c6ff"/></linearGradient></defs></svg>
+        <h1>Safe<span>Link</span></h1>
+        <p class="subtitle">احمي روابطك وملفاتك بسهولة</p>
+
+        <div class="card">
+            <form id="urlForm">
+                <div class="input-wrapper">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="#00c6ff" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.72"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.72-1.72"></path></svg>
+                    <input type="url" id="urlInput" placeholder="الصق الرابط المشبوه هنا..." required>
+                </div>
+                <button type="submit" class="btn btn-primary">افحص الرابط 🔍</button>
+            </form>
+
+            <div class="divider"><span>أو</span></div>
+
+            <form id="fileForm">
+                <div class="file-upload">
+                    <div class="file-info">
+                        <b>ارفع ملف لفحصه</b>
+                        <span>PDF, DOC, ZIP أو أي صيغة أخرى</span>
+                    </div>
+                    <label for="fileInput" class="btn-file">اختر ملف 📁</label>
+                    <input type="file" id="fileInput" required>
+                </div>
+                <button type="submit" class="btn btn-secondary">افحص الملف 🛡️</button>
+            </form>
+             <div id="resultBox" class="result"></div>
+        </div>
+
+        <div class="features">
+            <div class="feature-box"><div class="feature-icon">🔍</div><div><b>دقة عالية</b><span>كشف موثوق</span></div></div>
+            <div class="feature-box"><div class="feature-icon">🛡️</div><div><b>أمان كامل</b><span>حماية بياناتك</span></div></div>
+            <div class="feature-box"><div class="feature-icon">🚀</div><div><b>سرعة فائقة</b><span>نتائج في ثوان</span></div></div>
+        </div>
+        <footer><p>© 2024 SafeLink. جميع الحقوق محفوظة.</p></footer>
     </div>
 
-    <h2>Welcome Back!</h2>
-    <p class="subtitle">Login to continue to your account</p>
-
-    <div class="divider"><span>OR</span></div>
-
-    <button class="btn btn-google">
-      <img src="https://www.google.com/favicon.ico" class="icon"> Continue with Google
-    </button>
-
-    <button class="btn btn-fb">
-      <svg class="icon" fill="white" viewBox="0 0 24 24"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/></svg>
-      Continue with Facebook
-    </button>
-
-    <div class="shield">🛡️</div>
-    <p class="note">We never post without your permission</p>
-
-    <p class="signup">Don’t have an account? <a href="#">Sign up</a></p>
-
-    <div class="footer">
-      🔒 Secure • Fast • 100% Free
-    </div>
-  </div>
-
+    <script>
+        // نفس كود الجافاسكريبت بتاعك القديم
+        document.getElementById('urlForm').addEventListener('submit', async function(e){
+            e.preventDefault();
+            let url = document.getElementById('urlInput').value;
+            let box = document.getElementById('resultBox');
+            box.style.display = 'block';
+            box.className = 'result loading';
+            box.innerHTML = '⏳ جاري فحص الرابط: <b>' + url + '</b>';
+            let response = await fetch('/scan', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({url: url}) });
+            let result = await response.json();
+            box.className = 'result ' + result.status;
+            box.innerHTML = result.message;
+        });
+        document.getElementById('fileForm').addEventListener('submit', async function(e){
+            e.preventDefault();
+            let file = document.getElementById('fileInput').files[0];
+            let box = document.getElementById('resultBox');
+            let formData = new FormData();
+            formData.append('file', file);
+            box.style.display = 'block';
+            box.className = 'result loading';
+            box.innerHTML = '⏳ جاري رفع وتحليل الملف: <b>' + file.name + '</b>...';
+            let response = await fetch('/scan-file', { method: 'POST', body: formData });
+            let result = await response.json();
+            box.className = 'result ' + result.status;
+            box.innerHTML = result.message;
+        });
+        document.getElementById('fileInput').addEventListener('change', function(){
+            document.querySelector('.file-info b').innerText = this.files[0].name;
+        });
+    </script>
 </body>
 </html>
